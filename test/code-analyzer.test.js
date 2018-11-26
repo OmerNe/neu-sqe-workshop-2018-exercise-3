@@ -6,11 +6,11 @@ describe('The javascript parser', () => {
     it('is parsing an empty function correctly', () => {
         assert.equal(
             JSON.stringify(parseCode('')),
-            '{"type":"Program","body":[],"sourceType":"script","loc": {"start": {"line":0,"column":0' +
-            '},"end": {"line":0,"column":0}}}'
+            '{"type":"Program","body":[],"sourceType":"script","loc":{"start":{"line":0,"column":0' +
+            '},"end":{"line":0,"column":0}}}'
         );
     });
-    //NO MORE passable because of the line arguments
+    //NO MORE passable because of the lines attribute in the parser
     // it('is parsing a simple variable declaration correctly', () => {
     //     assert.equal(
     //         JSON.stringify(parseCode('let a = 1;')),
@@ -138,7 +138,7 @@ describe('The javascript parser', () => {
                 }
             }
         };
-        assert.deepEqual(recWhile(whileSt),[1,'While Statement','','true']);
+        assert.deepEqual(recWhile(whileSt),[1,'While Statement','',true]);
 
     });
 });
