@@ -12,6 +12,7 @@ const recBody = parsed => {
     {
         recParse(parsed.body[i]);
     }
+    return '';
 };
 
 const recIf = parsed => {
