@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {parseCode, recBody, recReturn, retIdent, retLit} from '../src/js/code-analyzer';
+import {parseCode, recBody, recReturn, retIdent, retLit, recWhile} from '../src/js/code-analyzer';
 
 /* eslint-disable max-lines-per-function*/
 describe('The javascript parser', () => {
@@ -105,8 +105,30 @@ describe('The javascript parser', () => {
                 }
             }
         };
-        assert.equal(
+        assert.deepEqual(
             recReturn(ret),[2,'Return Statement','',1]
         );
+    });
+    it('should return a proper while statement', function () {
+        let whileSt = {
+            'type': 'WhileStatement',
+            'test': {
+                'type': 'Literal',
+                'value': true,
+                'raw': 'true',
+                'loc': {
+                    'start': {
+                        'line': 1,
+                        'column': 6
+                    },
+                    'end': {
+                        'line': 1,
+                        'column': 10
+                    }
+                }
+            }
+        };
+        assert.deepEqual(recWhile(whileSt),[1,'While Statement','','true']);
+
     });
 });

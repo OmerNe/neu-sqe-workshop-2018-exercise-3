@@ -78,10 +78,13 @@ const retLit = parsed => {return parsed.value;};
 function recWhile(parsed) {
     addToTable(parsed.loc.start.line,'While Statement','',recParse(parsed.test));
     recParse(parsed.body);
+    return [parsed.loc.start.line,'While Statement','',recParse(parsed.test)];
 }
 
 function recReturn(parsed) {
     addToTable(parsed.loc.start.line,'Return Statement','',recParse(parsed.argument));
+    if(parsed.argument == null)
+        return [parsed.loc.start.line,'Return Statement','',''];
     return [parsed.loc.start.line,'Return Statement','',recParse(parsed.argument)]; //for testing
 }
 
@@ -144,4 +147,4 @@ const recParse=(parsed) =>{
 const addToTable = (line, type, name, value) => {
     list.push([line,type,name,value]);
 };
-export {parseCode, recParse,recFor,retLit,retIdent,recBody,recReturn};
+export {parseCode, recParse,recFor,retLit,retIdent,recBody,recReturn,recWhile};
