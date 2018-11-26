@@ -6,8 +6,8 @@ describe('The javascript parser', () => {
     it('is parsing an empty function correctly', () => {
         assert.equal(
             JSON.stringify(parseCode('')),
-            '{"type":"Program","body":[],"sourceType":"script","loc": {"start": {"line": 0,"column": 0' +
-            '},"end": {"line": 0,"column": 0}}}'
+            '{"type":"Program","body":[],"sourceType":"script","loc": {"start": {"line":0,"column":0' +
+            '},"end": {"line":0,"column":0}}}'
         );
     });
     //NO MORE passable because of the line arguments
@@ -125,6 +125,16 @@ describe('The javascript parser', () => {
                         'line': 1,
                         'column': 10
                     }
+                }
+            },
+            'loc': {
+                'start': {
+                    'line': 1,
+                    'column': 0
+                },
+                'end': {
+                    'line': 1,
+                    'column': 13
                 }
             }
         };
