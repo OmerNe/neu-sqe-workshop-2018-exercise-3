@@ -93,6 +93,16 @@ describe('The javascript parser', () => {
                         'column': 8
                     }
                 }
+            },
+            'loc': {
+                'start': {
+                    'line': 2,
+                    'column': 0
+                },
+                'end': {
+                    'line': 2,
+                    'column': 8
+                }
             }
         };
         assert.equal(
