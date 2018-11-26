@@ -2,11 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-
+        <title>The Ultimate Parser</title>
         <style>
             table {
                 width: 100%;
                 height: 100%;
+                border-color: grey;
+                border-collapse: collapse;
+
             }
 
             .textAreaWrapper {
@@ -42,6 +45,17 @@
                 </td>
                 <td>
                     <div class="textAreaWrapper">
+                        <table id="resultTable" >
+                            <thead id="headR">
+                            <th>Line</th>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Value</th>
+                            </thead>
+                            <tbody id="resultContent">
+
+                            </tbody>
+                        </table>
                         <textarea id="parsedCode" title="Parse code"></textarea>
                     </div>
                 </td>

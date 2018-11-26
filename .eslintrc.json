@@ -27,11 +27,11 @@
         ],
         "max-lines-per-function": [
             "error",
-            20
+            30
         ],
         "complexity": [
             "error",
-            5
+            20
         ]
     }
 }
