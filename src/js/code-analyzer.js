@@ -16,7 +16,7 @@ const recBody = parsed => {
 };
 
 const recIf = parsed => {
-    addToTable(parsed.loc.start.line,'If Statement',recParse(parsed.test));
+    addToTable(parsed.loc.start.line,'If Statement',recParse(parsed.test),'');
     recParse(parsed.consequent);
 
     if(parsed.alternate != null)
@@ -24,7 +24,7 @@ const recIf = parsed => {
 };
 
 const recFor = forParsed => {
-    addToTable(forParsed.loc.start.line, 'For Statement',recParse(forParsed.test),'');
+    addToTable(forParsed.loc.start.line, 'For Statement',recParse(forParsed.test),recParse(forParsed.update));
     recParse(forParsed.body);
 };
 
@@ -38,7 +38,16 @@ const recFuncDec = funcParsed => {
 };
 
 const vDeclirator = vParsed => {
-    addToTable(vParsed.loc.start.line,'Variable Declarator',vParsed.id.name,vParsed.init.value);
+    // if(vParsed.init.property == null)
+    // {
+    //     addToTable(vParsed.loc.start.line,'Variable Declarator',vParsed.id.name,vParsed.init.value);
+    // }
+    // else
+    addToTable(vParsed.loc.start.line,'Variable Declarator',vParsed.id.name
+        ,recParse(vParsed.init));
+
+    //print(test);
+    //addToTable(vParsed.loc.start.line,'Variable Declarator',vParsed.id.name,recParse(vParsed.));
 };
 
 const vDecliration = vParsed => {
@@ -53,6 +62,7 @@ const recAssign = assParsed => {
     let left = recParse(assParsed.left);
     let right = recParse(assParsed.right);
     addToTable(assParsed.loc.start.line, 'Assignment Expression',left,right);
+    return left +'='+right;
 
 };
 
@@ -69,7 +79,12 @@ const recBin = bParsed => {
     return bin;
 };
 
-const recMemb = memParsed => recParse(memParsed.object) + '[' + recParse(memParsed.property) + ']';
+const recMemb = memParsed => {
+    //console.log(memParsed.object);
+    //console.log(memParsed.property);
+    let s = recParse(memParsed.object) + '[' + recParse(memParsed.property) + ']';
+    return s;
+};
 
 const retIdent = parsed => {return parsed.name;};
 
@@ -121,17 +136,13 @@ const recParse=(parsed) =>{
             vDecliration(parsed);
             break;
         case 'AssignmentExpression':
-            recAssign(parsed);
-            break;
+            return recAssign(parsed);
         case 'UnaryExpression':
-            recUnary(parsed);
-            break;
+            return recUnary(parsed);
         case 'BinaryExpression':
-            recBin(parsed);
-            break;
+            return recBin(parsed);
         case 'MemberExpression':
-            recMemb(parsed);
-            break;
+            return recMemb(parsed);
         case 'Literal':
             return retLit(parsed);
         case 'Identifier':
@@ -147,4 +158,4 @@ const recParse=(parsed) =>{
 const addToTable = (line, type, name, value) => {
     list.push([line,type,name,value]);
 };
-export {parseCode, recParse,recFor,retLit,retIdent,recBody,recReturn,recWhile};
+export {parseCode, recParse,recFor,retLit,retIdent,recBody,recReturn,recWhile,recMemb};

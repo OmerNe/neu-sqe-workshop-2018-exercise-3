@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {parseCode, recBody, recReturn, retIdent, retLit, recWhile} from '../src/js/code-analyzer';
+import {parseCode, recBody, recReturn, retIdent, retLit, recWhile,recMemb} from '../src/js/code-analyzer';
 
 /* eslint-disable max-lines-per-function*/
 describe('The javascript parser', () => {
@@ -108,6 +108,53 @@ describe('The javascript parser', () => {
         assert.deepEqual(
             recReturn(ret),[2,'Return Statement','',1]
         );
+    });
+    it('should return member expression', function () {
+        let memb = {
+            'init': {
+                'type': 'MemberExpression',
+                'computed': true,
+                'object': {
+                    'type': 'Identifier',
+                    'name': 'arr',
+                    'loc': {
+                        'start': {
+                            'line': 1,
+                            'column': 9
+                        },
+                        'end': {
+                            'line': 1,
+                            'column': 12
+                        }
+                    }
+                },
+                'property': {
+                    'type': 'Identifier',
+                    'name': 'S',
+                    'loc': {
+                        'start': {
+                            'line': 1,
+                            'column': 13
+                        },
+                        'end': {
+                            'line': 1,
+                            'column': 14
+                        }
+                    }
+                },
+                'loc': {
+                    'start': {
+                        'line': 1,
+                        'column': 9
+                    },
+                    'end': {
+                        'line': 1,
+                        'column': 15
+                    }
+                }
+            }
+        };
+        assert.equal(recMemb(memb),'arr[S]');
     });
     it('should return a proper while statement', function () {
         let whileSt = {

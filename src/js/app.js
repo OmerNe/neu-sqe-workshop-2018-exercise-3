@@ -1,10 +1,10 @@
 import $ from 'jquery';
 import {parseCode, recParse} from './code-analyzer';
 
-
+let notShowTable = true;
 function debug()
 {
-    let notShowTable = false;
+    notShowTable = false;
     if(notShowTable)
     {
         $('#parsedCode').show();
