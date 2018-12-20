@@ -26,14 +26,12 @@ let ifBool = {};
 const recIf = parsed => {
     addToTable(parsed.loc.start.line,'If Statement',recParse(parsed.test),'');
     recParse(parsed.consequent);
-
-
     isDirty = false;
     let test = recParse(parsed.test);
     isDirty = true;
     replaceIfs[parsed.loc.start.line] = 'if('+test+'){';
 
-    let resultTest = eval(recParse(test))
+    let resultTest = eval(recParse(test));
     if(resultTest && enterIf)
     {
         ifBool[parsed.loc.start.line] = true;
@@ -94,7 +92,7 @@ const recAssign = assParsed => {
         otherDict[left] = recParse(assParsed.right);
         isDirty = false;
         try {
-            otherDict[left] = eval(assParsed.right)
+            otherDict[left] = eval(assParsed.right);
         }
         catch (e) {
             otherDict[left] = recParse(assParsed.right);

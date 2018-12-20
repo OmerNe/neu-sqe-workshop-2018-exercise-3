@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <title>The Ultimate Parser</title>
         <style>
+            textarea{
+                resize: none;
+            }
             table {
                 width: 100%;
                 height: 100%;
@@ -28,40 +31,30 @@
             <tr>
                 <td>
                     <div>
-                        <label>Enter code here</label>
+                        <label>Enter code here:</label>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <label>Parsed code here</label>
+                        <label>Proceessed code here:</label>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="textAreaWrapper">
-                        <textarea id="codePlaceholder" title="Enter code here"></textarea>
+                        <textarea autofocus id="codePlaceholder">Write the Javascript code here</textarea>
                     </div>
                 </td>
                 <td>
-                    <div class="textAreaWrapper">
-                        <!--<table id="resultTable" >-->
-                            <!--<thead id="headR">-->
-                            <!--<th>Line</th>-->
-                            <!--<th>Type</th>-->
-                            <!--<th>Name</th>-->
-                            <!--<th>Value</th>-->
-                            <!--</thead>-->
-                            <!--<tbody id="resultContent">-->
+                    <div id="markedCode">
 
-                            <!--</tbody>-->
-                        <!--</table>-->
-                        <!--<textarea id="parsedCode" title="Parse code"></textarea>-->
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
+                    <textarea id="inputArgs" >Add the arguments here</textarea>
                     <div>
                         <button id="codeSubmissionButton">Parse code</button>
                     </div>
