@@ -29,8 +29,8 @@ $(document).ready(function () {
         //    JSON.parse(parsedCode[1]),JSON.parse(parseProc[2]));
         $('#markedCode').empty();
         let bla = recParse(parseProc,argArr);
-        let flowChart = JSON.parse(bla);
-        flowChart = printFlowChart(flowChart);
+        //let flowChart = JSON.parse(bla);
+        let flowChart = printFlowChart(bla);
         printPath(flowChart);
         draw();
         //$('parsdeCode').html(resultLines);
@@ -90,16 +90,16 @@ const printPath = (ver) =>{
             if(ver.child != null) strToEdg += `${curVer}->${ver.child.type}${ver.child.index} \n`;
         }
         else{
-            if(ver.child != null)
+            if(ver.child !== null && ver.child !== '' && ver.child !== undefined)
                 strToEdg += `${curVer}(yes)->${ver.child.type}${ver.child.index} \n`;
-            if(ver.child != null)
+            if(ver.nChild !== null && ver.nChild !== '' && ver.nChild !== undefined)
                 strToEdg += `${curVer}(no)->${ver.nChild.type}${ver.nChild.index} \n`;
         }
         printPath(ver.child);
         printPath(ver.nChild);
     }
 };
-
+//import {parse} from '../../flowchart';
 const draw = () =>{
     let strC = '';
     for (let key in strToCDict)
@@ -113,6 +113,16 @@ const draw = () =>{
     let prntStr = strC+' \n'+strToEdg;
     while (prntStr.indexOf('\n \n') > -1)
         prntStr=prntStr.replace('\n \n', '\n');
-    let flowchart = flowchart.parse(prntStr);
+    let flowchart = parse(prntStr);
+
+    flowchart.drawSVG('diagram',
+        {'x': 0,'y': 0,'line-width': 1,'line-length': 100,'text-margin': 10,'font-size': 10,'font-color': 'black','line-color': 'black',
+            'element-color': 'black','fill': 'white','yes-text': 'T','no-text': 'F','arrow-end': 'block','scale': 1,
+            'flowstate' : {
+                'green' : { 'fill' : 'green'},
+                'null' : {'fill' : 'white'}
+            }
+        }
+    );
 
 };

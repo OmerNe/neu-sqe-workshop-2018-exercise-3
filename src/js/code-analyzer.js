@@ -165,8 +165,8 @@ const recParse= (parsed, args = [1, 2, 3]) =>{
     if(parsed === null || parsed === undefined)
         return '';
     else{
-        console.log(parsed);
-        console.log(parsed.type);
+        //console.log(parsed);
+        //console.log(parsed.type);
         switch (parsed.type) {
         case 'Program':
             return recProgram(parsed,args);
@@ -199,7 +199,7 @@ const recParse= (parsed, args = [1, 2, 3]) =>{
         case 'ExpressionStatement':
             return recExpres(parsed,args);
         default:
-            return 'error';
+            return graph;
         }
     }
 };
