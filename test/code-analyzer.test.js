@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {parseCode, recBody, recReturn, retIdent, retLit, recWhile,recMemb} from '../src/js/code-analyzer';
+import {parseCode, recProgram, recReturn, retIdent, retLit, recWhile,recMemb} from '../src/js/code-analyzer';
 
 /* eslint-disable max-lines-per-function*/
 describe('The javascript parser', () => {
@@ -55,7 +55,7 @@ describe('The javascript parser', () => {
             }
         };
         assert.equal(
-            recBody(block),''
+            recProgram(block),''
         );
     });
 
